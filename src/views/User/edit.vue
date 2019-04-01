@@ -106,7 +106,7 @@
 	        console.log(file, fileList);
 	      },
 	      onSuccess:function(e){
-	      	this.avatar = e.path;
+	      	this.avatar = e;
 	      },
 	      change:function(val){
 	      	val = Math.abs(val);
@@ -147,7 +147,7 @@
 	    		_this.perssionStr = res.info.role;
 	    		
 	    	});
-	    }
+	    },
 	  };
 </script>
 

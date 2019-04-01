@@ -37,7 +37,7 @@ export default {
 	// 登录
   	login:function(){
       // 重新赋值vm使 axios可用vue实例
-      let vm = this;
+      var vm = this;
       if(!this.isCheck){
         this.$message.error('请先认真阅读本站协议！');
         return;
@@ -48,19 +48,27 @@ export default {
         return;
       }
 
-      this.$post('/Admin/Login/indexX',{username:this.username,password:this.password})
+      this.$post(this.ROOT_URL + 'Admin/login',{username:this.username,password:this.password})
       .then(function (res) {
         if(res.code == 200){
-          // 存储用户的密码
-          localStorage.setItem('username',vm.username);
-          localStorage.setItem('password',vm.password);
-          // localStorage.setItem('token',vm.token);
+          console.log(res);
+          // 存储用户的token
+          localStorage.setItem('token',res.token);
           vm.$message({message:'登录成功！',type:'success'});
           vm.$router.push({name:'default'});
-          localStorage.removeItem('name');
         }
       });
   	}
+  },
+  created:function(){
+    var vm = this;
+    // 判断token是否失效
+    this.$post(this.ROOT_URL + 'Admin/checkUser')
+      .then(function (res) {
+        if(res.code == 200){
+          vm.$router.push({name:'default'});
+        }
+      });
   }
 	
 }

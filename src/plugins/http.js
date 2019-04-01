@@ -5,7 +5,7 @@ import {Message} from 'element-ui';
 
 // axios.defaults.timeout = 5000;  // 请求超时
 axios.defaults.baseURL ='http://vueyunk.com/'; // 域名
-// axios.defaults.headers.common['Authorization'] = 'abcd1234546';
+// axios.defaults.headers.common['Authorization'] = 'Bearer 1111111';
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
 // axios.defaults.withCredentials = true; // 允许跨域携带cookie
 // axios.defaults.headers.get['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
@@ -65,7 +65,19 @@ axios.interceptors.response.use(function (res) {
             Message.error(v + ':' + err.response.data.errors[v][0]);
             continue;
           }
-        break;
+          break;
+        case 401:
+          // token 失效
+          if(err.response.statusText == 'Unauthorized'){
+            if(err.response.data.message == undefined){
+              Message.error(err.response.data);
+            }else{
+              Message.error(err.response.data.message);
+            }
+          }else{
+            Message.error(err.response.statusText+",Code："+err.response.status+"！");
+          }
+          break;
 
         default:
           Message.error(err.response.statusText+",Code："+err.response.status+"！");

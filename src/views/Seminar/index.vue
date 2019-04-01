@@ -1,10 +1,10 @@
 <template>
 	<div class="index_main">
 		<div class="main_btn_left">
-			<router-link class="admin_fff_btn" :to="{name:'user_add'}"><el-button type="primary" icon="el-icon-plus">添加</el-button></router-link>
+			<router-link class="admin_fff_btn" :to="{name:'seminar_add'}"><el-button type="primary" icon="el-icon-plus">添加</el-button></router-link>
 
 			<!-- <input class="index_search_input" type="text" placeholder="输入搜索内容"> -->
-			<el-input  class="search_input" size="small" v-model="username" placeholder="请输入用户名"></el-input>
+			<el-input  class="search_input" size="small" v-model="title" placeholder="请输入标题"></el-input>
 			<el-button icon="el-icon-search" @click="search" plain>搜索</el-button>
 
 			<el-button class="main_del_right" icon="el-icon-delete" type="danger" @click="del">批量删除</el-button>
@@ -16,24 +16,28 @@
 
 				<el-table-column type="selection" width="55"></el-table-column>
 
-				<el-table-column label="#" width="120">
+				<el-table-column label="#" width="60">
 				<template slot-scope="scope">{{ scope.row.id }}</template>
 				</el-table-column>
 
-				<el-table-column label="用户名" >
-				<template slot-scope="scope">{{ scope.row.username }}</template>
+				<el-table-column label="缩略图" width="80">
+				<template slot-scope="scope"><img width="50px" height="50px" :src="scope.row.thumb"></template>
 				</el-table-column>
 
-				<el-table-column label="头像" >
-				<template slot-scope="scope"><img width="50px" height="50px" :src="scope.row.avatar"></template>
+				<el-table-column label="标题" >
+				<template slot-scope="scope">{{ scope.row.title }}</template>
 				</el-table-column>
 
-				<el-table-column label="昵称" >
-				<template slot-scope="scope">{{ scope.row.nickname }}</template>
+				<el-table-column label="栏目" >
+				<template slot-scope="scope">{{ scope.row.get_parent_name.name }}</template>
 				</el-table-column>
 
-				<el-table-column label="角色">
-				<template slot-scope="scope">{{ scope.row.role_name }}</template>
+				<el-table-column label="热门" >
+				<template slot-scope="scope"><el-tag v-if="scope.row.is_hot==1" type="success">是</el-tag><el-tag v-else type="danger">否</el-tag></template>
+				</el-table-column>
+
+				<el-table-column label="置顶">
+				<template slot-scope="scope"><el-tag v-if="scope.row.is_top==1" type="success">是</el-tag><el-tag v-else type="danger">否</el-tag></template>
 				</el-table-column>
 
 				<el-table-column label="加入时间">
@@ -43,7 +47,7 @@
 				<el-table-column label="操作">
 				<template slot-scope="scope">
 				<!-- <el-button plain>查看</el-button> -->
-				<router-link :to="{name:'user_edit',params:{id:scope.row.id}}"><el-button plain icon="el-icon-edit" >编辑</el-button></router-link>
+				<router-link :to="{name:'seminar_edit',params:{id:scope.row.id}}"><el-button plain icon="el-icon-edit" >编辑</el-button></router-link>
 				</template>
 				</el-table-column>
 
@@ -62,7 +66,7 @@
 		    	lists: [],
 		    	ids:null,
 		    	page:[],
-		    	username:'',
+		    	title:'',
 
 		    }
 	    },
@@ -90,7 +94,7 @@
 
 	      	var _this = this;
 	      	this.ids = this.ids.substr(0, this.ids.length - 1);
-	      	this.$post(this.ROOT_URL + 'Admin/user/del',{id:this.ids}).then(function(res){
+	      	this.$post(this.ROOT_URL + 'Admin/seminar/del',{id:this.ids}).then(function(res){
 	      		_this.$message({
 		          message: '恭喜你，删除成功！',
 		          type: 'success'
@@ -108,14 +112,14 @@
 	      },
 	      search:function(){
 	      	var _this = this;
-	    	_this.$post(this.ROOT_URL + 'Admin/user/index',{limit:this.page.limit,page:this.page.page,username:this.username}).then(function(res){
+	    	_this.$post(this.ROOT_URL + 'Admin/seminar/index',{limit:this.page.limit,page:this.page.page,title:this.title}).then(function(res){
 	    		_this.lists = res.data;
 	    		_this.page = res.page;
 	    	});
 	      },
 	      getList:function(){
 	      	var _this = this;
-	    	_this.$post(this.ROOT_URL + 'Admin/user/index',{limit:this.page.limit,page:this.page.page}).then(function(res){
+	    	_this.$post(this.ROOT_URL + 'Admin/seminar/index',{limit:this.page.limit,page:this.page.page}).then(function(res){
 	    		_this.lists = res.data;
 	    		_this.page = res.page;
 	    	});

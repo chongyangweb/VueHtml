@@ -12,7 +12,7 @@
 					<!-- 导航 -->
 					<div class="left_bar" ref="left_bar">
 						<el-menu background-color="#20222A" text-color="#cfcfcf"  active-text-color="#fff" :router=true>
-							<el-menu-item index="index">
+							<el-menu-item index="/Admin/index">
 			      				<span slot="title"><i class="icon iconfont title_i">&#xe625;</i><font :class="{left_bar_text:is_left_bar_text}">系统首页</font></span>
 			      			</el-menu-item>
 							<el-submenu v-for="v in cat" v-if="v.pid==0" :index="v.id+''">
@@ -68,15 +68,15 @@
 						  	
 
 							<div class="head_user">
-								<el-dropdown>
+								<el-dropdown  @command="handleCommand">
 									<span class="el-dropdown-link">
-									春天的话<i class="el-icon-arrow-down el-icon--right"></i>
+									{{user.username}}<i class="el-icon-arrow-down el-icon--right"></i>
 									</span>
 									<el-dropdown-menu class="head_menu" slot="dropdown">
 										<el-dropdown-item>黄金糕</el-dropdown-item>
 										<el-dropdown-item>狮子头</el-dropdown-item>
 										<el-dropdown-item>螺蛳粉</el-dropdown-item>
-										<el-dropdown-item divided>退出</el-dropdown-item>
+										<el-dropdown-item command="logout" divided>退出</el-dropdown-item>
 									</el-dropdown-menu>
 								</el-dropdown>
 							</div>
@@ -130,6 +130,7 @@ export default {
 		return {
 			data:null,
 			cat:[], // 栏目
+			user:[], // 用户信息
 			transitionName:'slide-fade',
 			spanLen:3,
 			spanLen2:21,
@@ -148,7 +149,21 @@ export default {
 
 		// 退出账号
 		logout:function(){
-			localStorage.removeItem('token');
+			var _this = this;
+			this.$get(this.ROOT_URL + "Admin/logout").then(function(res){
+				if(res.code == 200){
+					localStorage.removeItem('token');
+					_this.$message({message:res.message,type:'success'});
+					_this.$router.push({name:'login'});
+				}
+			});
+			
+		},
+		handleCommand:function(name=''){
+			console.log(name);
+			if(name == 'logout'){
+				this.logout();
+			}
 		},
 
 		// 隐藏左侧栏目
@@ -192,6 +207,7 @@ export default {
 		var _this = this;
 		this.$get(this.ROOT_URL + "Admin/index").then(function(res){
 			_this.cat = res.cat;
+			_this.user = res.user;
 		});
 	},
 	mounted:function(){

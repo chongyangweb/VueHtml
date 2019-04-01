@@ -1,10 +1,10 @@
 <template>
 	<div class="index_main">
 		<div class="main_btn_left">
-			<router-link class="admin_fff_btn" :to="{name:'user_add'}"><el-button type="primary" icon="el-icon-plus">添加</el-button></router-link>
+			<router-link class="admin_fff_btn" :to="{name:'slide_add'}"><el-button type="primary" icon="el-icon-plus">添加</el-button></router-link>
 
 			<!-- <input class="index_search_input" type="text" placeholder="输入搜索内容"> -->
-			<el-input  class="search_input" size="small" v-model="username" placeholder="请输入用户名"></el-input>
+			<el-input  class="search_input" size="small" v-model="name" placeholder="请输入幻灯片标题"></el-input>
 			<el-button icon="el-icon-search" @click="search" plain>搜索</el-button>
 
 			<el-button class="main_del_right" icon="el-icon-delete" type="danger" @click="del">批量删除</el-button>
@@ -16,34 +16,34 @@
 
 				<el-table-column type="selection" width="55"></el-table-column>
 
-				<el-table-column label="#" width="120">
+				<el-table-column label="#" width="60">
 				<template slot-scope="scope">{{ scope.row.id }}</template>
 				</el-table-column>
 
-				<el-table-column label="用户名" >
-				<template slot-scope="scope">{{ scope.row.username }}</template>
+				<el-table-column label="标题" >
+				<template slot-scope="scope">{{ scope.row.name }}</template>
 				</el-table-column>
 
-				<el-table-column label="头像" >
-				<template slot-scope="scope"><img width="50px" height="50px" :src="scope.row.avatar"></template>
+				<el-table-column label="幻灯片" >
+				<template slot-scope="scope"><img width="50px" height="50px" :src="scope.row.image_url"></template>
 				</el-table-column>
 
-				<el-table-column label="昵称" >
-				<template slot-scope="scope">{{ scope.row.nickname }}</template>
+				<el-table-column label="链接" >
+				<template slot-scope="scope">{{ scope.row.url }}</template>
 				</el-table-column>
 
-				<el-table-column label="角色">
-				<template slot-scope="scope">{{ scope.row.role_name }}</template>
+				<el-table-column label="排序">
+				<template slot-scope="scope">{{ scope.row.sort }}</template>
 				</el-table-column>
 
-				<el-table-column label="加入时间">
-				<template slot-scope="scope">{{ scope.row.add_time|formatDate}}</template>
+				<el-table-column label="类型">
+				<template slot-scope="scope"><span v-if="scope.row.is_type===0">PC端</span><span v-else>Mobile端</span></template>
 				</el-table-column>
 
 				<el-table-column label="操作">
 				<template slot-scope="scope">
 				<!-- <el-button plain>查看</el-button> -->
-				<router-link :to="{name:'user_edit',params:{id:scope.row.id}}"><el-button plain icon="el-icon-edit" >编辑</el-button></router-link>
+				<router-link :to="{name:'slide_edit',params:{id:scope.row.id}}"><el-button plain icon="el-icon-edit" >编辑</el-button></router-link>
 				</template>
 				</el-table-column>
 
@@ -62,7 +62,7 @@
 		    	lists: [],
 		    	ids:null,
 		    	page:[],
-		    	username:'',
+		    	name:'',
 
 		    }
 	    },
@@ -90,7 +90,7 @@
 
 	      	var _this = this;
 	      	this.ids = this.ids.substr(0, this.ids.length - 1);
-	      	this.$post(this.ROOT_URL + 'Admin/user/del',{id:this.ids}).then(function(res){
+	      	this.$post(this.ROOT_URL + 'Admin/slide/del',{id:this.ids}).then(function(res){
 	      		_this.$message({
 		          message: '恭喜你，删除成功！',
 		          type: 'success'
@@ -108,14 +108,14 @@
 	      },
 	      search:function(){
 	      	var _this = this;
-	    	_this.$post(this.ROOT_URL + 'Admin/user/index',{limit:this.page.limit,page:this.page.page,username:this.username}).then(function(res){
+	    	_this.$post(this.ROOT_URL + 'Admin/slide/index',{limit:this.page.limit,page:this.page.page,name:this.name}).then(function(res){
 	    		_this.lists = res.data;
 	    		_this.page = res.page;
 	    	});
 	      },
 	      getList:function(){
 	      	var _this = this;
-	    	_this.$post(this.ROOT_URL + 'Admin/user/index',{limit:this.page.limit,page:this.page.page}).then(function(res){
+	    	_this.$post(this.ROOT_URL + 'Admin/slide/index',{limit:this.page.limit,page:this.page.page}).then(function(res){
 	    		_this.lists = res.data;
 	    		_this.page = res.page;
 	    	});
