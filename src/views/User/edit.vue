@@ -34,7 +34,7 @@
 				<el-col :span="10">
 				<el-upload
 				  class="upload-demo"
-				  :action="ROOT_URL + 'Admin/user/avatar'"
+				  :action="ROOT_URL + 'Admin/user/avatar?token=' + getToken()"
 				  :on-remove="handleRemove"
 				  :file-list="fileList2"
 				  :on-success="onSuccess"
@@ -131,6 +131,9 @@
 	      			return true;
 	      		}
 	      	}
+	      },
+	      getToken:function(){
+	      	return localStorage.getItem('token');
 	      }
 	    },
 	    created:function(){

@@ -39,7 +39,7 @@
 				<el-col :span="10">
 				<el-upload
 				  class="upload-demo"
-				  :action="ROOT_URL + 'Admin/product/thumb'"
+				  :action="ROOT_URL + 'Admin/product/thumb?token=' + getToken()"
 				  :on-remove="handleRemove"
 				  :file-list="fileList2"
 				  :on-success="onSuccess"
@@ -131,6 +131,9 @@
 	      onSuccess:function(e){
 	      	console.log(e);
 	      	this.thumb = e.thumb_path;
+	      },
+	      getToken:function(){
+	      	return localStorage.getItem('token');
 	      }
 	    },
 	    created:function(){

@@ -20,7 +20,7 @@
 				<el-col :span="10">
 				<el-upload
 				  class="upload-demo"
-				  :action="ROOT_URL + 'Admin/slide/slide'"
+				  :action="ROOT_URL + 'Admin/slide/slide?token=' + getToken()"
 				  :on-remove="handleRemove"
 				  :file-list="fileList2"
 				  :on-success="onSuccess"
@@ -100,11 +100,15 @@
 	      },
 	      onSuccess:function(e){
 	      	this.image_url = e.path;
-	      }
+	      },
+	      getToken:function(){
+	      	return localStorage.getItem('token');
+	      },
 	    },
 	    handleRemove(file, fileList) {
         	console.log(file, fileList);
       	},
+
 	  };
 </script>
 

@@ -6,14 +6,14 @@
             <h3 class="head_log"><img src="../assets/head-logo.png" alt=""></h3>
 
                 <div class="form-group">
-		<el-input size="small" v-model="username" placeholder="用户名"></el-input>
+		<el-input size="small" v-model="username" @keyup.enter.native="login" placeholder="用户名"></el-input>
                 </div>
                 <div class="form-group">
-                <el-input type="password" size="small" v-model="password" class="login_input" placeholder="密码"></el-input>
+                <el-input type="password" size="small" v-model="password" @keyup.enter.native="login" class="login_input" placeholder="密码"></el-input>
                 </div>
 		<div class="form-group" style="font-size:12px;">
                     <el-checkbox name="isCheck" v-model="isCheck" label="1"><font style="font-size:13px;">我已同意</font></el-checkbox>
-			&nbsp;&nbsp;&nbsp;&nbsp;<a class="must_rad" href="/index.php/Admin/Test/mustRead">《云控系统用户使用协议》</a>（必读）
+			&nbsp;&nbsp;&nbsp;&nbsp;<a class="must_rad" href="/index.php/Admin/Test/mustRead">《系统用户使用协议》</a>（必读）
                 </div>
                  <el-button size="mini" class="login_btn" @click="login" type="primary">登 录</el-button>
 
@@ -79,8 +79,8 @@ export default {
 <style scoped>
 
 .login_bg{
-background:url('../assets/reg-bg.jpg');background-position: center;background-size: 100%;height:100%;
-}
+background:url('../assets/login_bg.svg');background-position: center;background-size: 100%;height:100%;background-color:#f1f1f1
+;}
 .login_black_hg{background:#fff;width:400px;border-radius:6px;padding:0px 40px 20px 40px;box-sizing:border-box;
 -moz-box-sizing:border-box; /* Firefox */
 -webkit-box-sizing:border-box; /* Safari */

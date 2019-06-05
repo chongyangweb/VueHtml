@@ -28,10 +28,15 @@ Scrollbar,
 TabPane,
 Tabs,
 Option,
+Switch,
+Radio,
+Progress,
+Dialog,
 } from 'element-ui'
 
 Vue.prototype.$ELEMENT = { size: 'mini', zIndex: 3000 };
 Vue.use(Button);
+Vue.use(Radio);
 Vue.use(Select);
 Vue.use(Option);
 Vue.use(Input);
@@ -58,4 +63,7 @@ Vue.use(Upload);
 Vue.use(Scrollbar);
 Vue.use(TabPane);
 Vue.use(Tabs);
+Vue.use(Switch);
+Vue.use(Progress);
+Vue.use(Dialog);
 Vue.prototype.$message = Message;

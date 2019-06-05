@@ -39,7 +39,7 @@
 				<el-col :span="10">
 				<el-upload
 				  class="upload-demo"
-				  :action="ROOT_URL + 'Admin/article/thumb'"
+				  :action="ROOT_URL + 'Admin/article/thumb?token=' + getToken()"
 				  :on-remove="handleRemove"
 				  :file-list="fileList2"
 				  :on-success="onSuccess"
@@ -136,6 +136,9 @@
 	      			return true;
 	      		}
 	      	}
+	      },
+	      getToken:function(){
+	      	return localStorage.getItem('token');
 	      }
 	    },
 	    created:function(){
@@ -149,7 +152,7 @@
 		    E.customConfig.onchange = function (html) {
             	_this.content = html;
         	}
-        	E.customConfig.uploadImgServer = this.ROOT_URL + 'Admin/Auto/content_upload';
+        	E.customConfig.uploadImgServer = this.ROOT_URL + 'Admin/Auto/content_upload?token=' + this.getToken();
         	E.customConfig.uploadFileName = 'file';
         	E.customConfig.uploadImgMaxSize = 3 * 1024 * 1024;
 		    E.create();
@@ -163,7 +166,9 @@
 	    		_this.content = res.info.content;
 	    		_this.is_hot = res.info.is_hot+'';
 	    		_this.is_top = res.info.is_top+'';
-	    		_this.cid = res.info.cid;
+	    		if(res.info.cid != 0){
+	    			_this.pid = res.info.pid;
+	    		}
 	    		_this.fileList2.push({name:'',url:res.info.thumb});
 	    		_this.parent = res.columns;
 	    		E.txt.html(_this.content);

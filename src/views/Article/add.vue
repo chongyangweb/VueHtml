@@ -39,7 +39,7 @@
 				<el-col :span="10">
 				<el-upload
 				  class="upload-demo"
-				  :action="ROOT_URL + 'Admin/article/thumb'"
+				  :action="ROOT_URL + 'Admin/article/thumb?token=' + getToken()"
 				  :on-remove="handleRemove"
 				  :file-list="fileList2"
 				  :on-success="onSuccess"
@@ -131,6 +131,9 @@
 	      onSuccess:function(e){
 	      	console.log(e);
 	      	this.thumb = e.thumb_path;
+	      },
+	      getToken:function(){
+	      	return localStorage.getItem('token');
 	      }
 	    },
 	    created:function(){
@@ -143,7 +146,7 @@
 		    E.customConfig.onchange = function (html) {
             	_this.content = html;
         	}
-        	E.customConfig.uploadImgServer = this.ROOT_URL + 'Admin/Auto/content_upload';
+        	E.customConfig.uploadImgServer = this.ROOT_URL + 'Admin/Auto/content_upload?token=' + this.getToken;
         	E.customConfig.uploadFileName = 'file';
         	E.customConfig.uploadImgMaxSize = 3 * 1024 * 1024;
 		    E.create();

@@ -11,6 +11,7 @@
 
 					<!-- 导航 -->
 					<div class="left_bar" ref="left_bar">
+						<div class="admin_logo"><span><font color="#409EFF">Q</font>ingwu</span></div>
 						<el-menu background-color="#20222A" text-color="#cfcfcf"  active-text-color="#fff" :router=true>
 							<el-menu-item index="/Admin/index">
 			      				<span slot="title"><i class="icon iconfont title_i">&#xe625;</i><font :class="{left_bar_text:is_left_bar_text}">系统首页</font></span>
@@ -225,7 +226,7 @@ export default {
 	  }
 	}
 	
-}
+};
 
 </script>
 
@@ -254,6 +255,7 @@ export default {
 .right_head_other .item{margin-top: 17px;}
 .item .right_head_i{line-height: 20px;}
 .left_bar_text{display: none;}
-
+.admin_logo{text-align: center;background: #111;height: 42px;padding-top: 10px;color:#fff;}
+.admin_logo span{line-height: 20px;font-size: 20px;}
 </style>
 

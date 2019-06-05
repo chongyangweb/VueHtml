@@ -15,7 +15,7 @@ axios.interceptors.request.use(function (config) {
     // 在发送请求之前做些什么
     const token = localStorage.getItem('token');
     // const uid = localStorage.getItem('uid');
-
+    
     // post 传输
     if(config.method === 'post' && !isEmpty(token)){
       let data = qs.parse(config.data);
@@ -32,6 +32,7 @@ axios.interceptors.request.use(function (config) {
           ...config.params
       };
     }
+    
 
     return config;
   }, function (error) {
@@ -43,7 +44,7 @@ axios.interceptors.request.use(function (config) {
 // 添加响应拦截器
 axios.interceptors.response.use(function (res) {
     // 对响应数据做点什么
-    console.log(res);
+    // console.log(res);
     if(res.status != 200){
       Message.error("请求异常,错误信息："+res.statusText+"！");
       console.log(res);
@@ -58,7 +59,7 @@ axios.interceptors.response.use(function (res) {
 
     // 存在状态码
     if (err.response.status) {
-      console.log(err.response);
+      // console.log(err.response);
       switch(err.response.status){
         case 422:
           for(var v in err.response.data.errors){
@@ -73,6 +74,7 @@ axios.interceptors.response.use(function (res) {
               Message.error(err.response.data);
             }else{
               Message.error(err.response.data.message);
+              window.location.href='/#/admin/login';
             }
           }else{
             Message.error(err.response.statusText+",Code："+err.response.status+"！");

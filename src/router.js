@@ -3,10 +3,13 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Login from './views/login.vue'
 import Index from './views/index.vue'
-import Default from './views/default.vue'
+import Default from './views/default2.vue'
 import System from '@/views/System/index.vue'
 import Version from '@/views/Version/index.vue'
 import Task from '@/views/Task/index.vue'
+
+// 404视图
+import Error404 from '@/views/Error/404.vue'
 
 // 栏目
 import Cat from '@/views/Cat/index.vue'
@@ -28,6 +31,12 @@ import Slide from '@/views/Slide/index.vue'
 import SlideAdd from '@/views/Slide/add.vue'
 import SlideEdit from '@/views/Slide/edit.vue'
 
+// 其他设置
+import OtherSetting from '@/views/OtherSetting/index.vue'
+
+// 配置 微信app_id等
+import Config from '@/views/Config/index.vue'
+
 // 栏目管理
 import Columns from '@/views/Columns/index.vue'
 import ColumnsAdd from '@/views/Columns/add.vue'
@@ -48,6 +57,43 @@ import Seminar from '@/views/Seminar/index.vue'
 import SeminarAdd from '@/views/Seminar/add.vue'
 import SeminarEdit from '@/views/Seminar/edit.vue'
 
+// 商品管理
+import Goods from '@/views/Goods/index.vue'
+import GoodsAdd from '@/views/Goods/add.vue'
+import GoodsEdit from '@/views/Goods/edit.vue'
+
+// 商品栏目
+import GoodsCat from '@/views/GoodsCat/index.vue'
+import GoodsCatAdd from '@/views/GoodsCat/add.vue'
+import GoodsCatEdit from '@/views/GoodsCat/edit.vue'
+
+// 商品品牌
+import GoodsBrand from '@/views/GoodsBrand/index.vue'
+import GoodsBrandAdd from '@/views/GoodsBrand/add.vue'
+import GoodsBrandEdit from '@/views/GoodsBrand/edit.vue'
+
+// 店铺幻灯片
+import GoodsSlide from '@/views/GoodsSlide/index.vue'
+import GoodsSlideAdd from '@/views/GoodsSlide/add.vue'
+import GoodsSlideEdit from '@/views/GoodsSlide/edit.vue'
+
+// 商品评论
+import GoodsComment from '@/views/GoodsComment/index.vue'
+
+// 订单列表
+import Order from '@/views/Order/index.vue'
+import OrderInfo from '@/views/Order/info.vue'
+
+// 售后服务
+import GoodsServerEdit from '@/views/GoodsServer/edit.vue'
+
+// 微信公众号
+// 商品栏目
+import WechatCat from '@/views/WechatCat/index.vue'
+import WechatCatAdd from '@/views/WechatCat/add.vue'
+import WechatCatEdit from '@/views/WechatCat/edit.vue'
+
+
 import List from './views/list.vue'
 
 Vue.use(Router)
@@ -56,8 +102,9 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home
+      redirect: 'login',
+      hidden: true
+      // component: Home
     },
     {
       path: '/about',
@@ -67,6 +114,10 @@ export default new Router({
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
     },
+
+    // 404 page must be placed at the end !!!
+    { path: '*', redirect: '/404', hidden: true },
+    {path: '/404',name: '404',component: Error404},
   
     // 登录
     {path: '/Admin/login',name: 'login',component: Login},
@@ -113,10 +164,51 @@ export default new Router({
       {path:'/Admin/product/add',name:'product_add',component:ProductAdd}, 
       {path:'/Admin/product/edit/:id',name:'product_edit',component:ProductEdit},
 
-      // 产品管理
+      // 专题管理
       {path:'/Admin/seminar/index',name:'seminar_index',component:Seminar}, 
       {path:'/Admin/seminar/add',name:'seminar_add',component:SeminarAdd}, 
       {path:'/Admin/seminar/edit/:id',name:'seminar_edit',component:SeminarEdit},
+
+      // 其他设置
+      {path:'/Admin/other_setting/index',name:'other_setting',component:OtherSetting}, 
+
+      // 设置 微信app_id 等
+      {path:'/Admin/config/index',name:'config_index',component:Config}, 
+
+      // 商品管理
+      {path:'/Admin/goods/index',name:'goods_index',component:Goods}, 
+      {path:'/Admin/goods/add',name:'goods_add',component:GoodsAdd},
+      {path:'/Admin/goods/edit/edit/:id',name:'goods_edit',component:GoodsEdit},
+
+      // 商品栏目
+      {path:'/Admin/goods_cat/index',name:'goods_cat_index',component:GoodsCat}, 
+      {path:'/Admin/goods_cat/add',name:'goods_cat_add',component:GoodsCatAdd}, 
+      {path:'/Admin/goods_cat/edit/:id',name:'goods_cat_edit',component:GoodsCatEdit},
+
+      // 商品品牌
+      {path:'/Admin/goods_brand/index',name:'goods_brand_index',component:GoodsBrand}, 
+      {path:'/Admin/goods_brand/add',name:'goods_brand_add',component:GoodsBrandAdd}, 
+      {path:'/Admin/goods_brand/edit/:id',name:'goods_brand_edit',component:GoodsBrandEdit},
+
+      // 店铺幻灯片
+      {path:'/Admin/goods_slide/index',name:'goods_slide_index',component:GoodsSlide}, 
+      {path:'/Admin/goods_slide/add',name:'goods_slide_add',component:GoodsSlideAdd}, 
+      {path:'/Admin/goods_slide/edit/:id',name:'goods_slide_edit',component:GoodsSlideEdit},
+
+      // 订单列表
+      {path:'/Admin/order/index',name:'order_index',component:Order}, 
+      {path:'/Admin/order/info/:id',name:'order_info',component:OrderInfo}, 
+
+      // 商品评论
+      {path:'/Admin/goods_comment/index',name:'goods_comment_index',component:GoodsComment}, 
+
+      // 售后服务
+      {path:'/Admin/goods_server/edit',name:'goods_server_edit',component:GoodsServerEdit}, 
+
+      // 微信公众号
+      {path:'/Admin/wechat_cat/index',name:'wechat_cat_index',component:WechatCat}, 
+      {path:'/Admin/wechat_cat/add',name:'wechat_cat_add',component:WechatCatAdd}, 
+      {path:'/Admin/wechat_cat/edit/:id',name:'wechat_cat_edit',component:WechatCatEdit},
 
       {path:'/Admin/list',name:'list',component:List}, // 模版
     ]},

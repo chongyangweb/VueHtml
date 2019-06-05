@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import './plugins/element.js'
 
+import './plugins/element.js'// element Ui 库
 import '../public/style.css' // 公共类
 import '../public/fonts/iconfont.css' // 公共类
-import './plugins/element.js' // element Ui 库
+// import './plugins/element.js' // element Ui 库
 import {formatDate} from './plugins/function.js' // 辅助js 库
 import {post,get,put,deletes,toJson,isEmpty} from './plugins/http.js' // axios
 
@@ -22,7 +22,12 @@ Vue.filter('formatDate', function (time) {
     return formatDate(date, 'yyyy-MM-dd hh:mm');
 });
 
-Vue.prototype.ROOT_URL = 'http://hgadmins.com/api/';
+Vue.filter('formatDataAuto', function ([time,str]) {
+    var date = new Date(time*1000);
+    return formatDate(date, str);
+});
+
+Vue.prototype.ROOT_URL = 'http://s.qingwuit.com/api/';
 
 Vue.config.productionTip = false
 

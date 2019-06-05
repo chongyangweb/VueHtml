@@ -34,7 +34,7 @@
 				<el-col :span="10">
 				<el-upload
 				  class="upload-demo"
-				  :action="ROOT_URL + 'Admin/setting/upload_logo'"
+				  :action="ROOT_URL + 'Admin/setting/upload_logo?token=' + getToken()"
 				  :on-remove="handleRemove"
 				  :file-list="fileList2"
 				  :on-success="onSuccess"
@@ -104,6 +104,9 @@
 	      onSuccess:function(e){
 	      	this.logo = e.path;
 	      },
+	      getToken:function(){
+	      	return localStorage.getItem('token');
+	      }
 	    },
 	    created:function(){
 	    	var _this = this;
