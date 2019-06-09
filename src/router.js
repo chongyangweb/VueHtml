@@ -93,6 +93,20 @@ import WechatCat from '@/views/WechatCat/index.vue'
 import WechatCatAdd from '@/views/WechatCat/add.vue'
 import WechatCatEdit from '@/views/WechatCat/edit.vue'
 
+/****
+ * 答题系统
+***/
+
+// 年级
+import TeacherGrade from '@/views/TeacherGrade/index.vue'
+import TeacherGradeAdd from '@/views/TeacherGrade/add.vue'
+import TeacherGradeEdit from '@/views/TeacherGrade/edit.vue'
+
+// 科目
+import TeacherSubject from '@/views/TeacherSubject/index.vue'
+import TeacherSubjectAdd from '@/views/TeacherSubject/add.vue'
+import TeacherSubjectEdit from '@/views/TeacherSubject/edit.vue'
+
 
 import List from './views/list.vue'
 
@@ -209,6 +223,21 @@ export default new Router({
       {path:'/Admin/wechat_cat/index',name:'wechat_cat_index',component:WechatCat}, 
       {path:'/Admin/wechat_cat/add',name:'wechat_cat_add',component:WechatCatAdd}, 
       {path:'/Admin/wechat_cat/edit/:id',name:'wechat_cat_edit',component:WechatCatEdit},
+
+      /****
+       * 答题系统
+      ***/
+
+      // 年级
+      {path:'/Admin/teacher_grade/index',name:'teacher_grade_index',component:TeacherGrade}, 
+      {path:'/Admin/teacher_grade/add',name:'teacher_grade_add',component:TeacherGradeAdd}, 
+      {path:'/Admin/teacher_grade/edit/:id',name:'teacher_grade_edit',component:TeacherGradeEdit}, 
+
+      // 科目
+      {path:'/Admin/teacher_subject/index',name:'teacher_subject_index',component:TeacherSubject}, 
+      {path:'/Admin/teacher_subject/add',name:'teacher_subject_add',component:TeacherSubjectAdd}, 
+      {path:'/Admin/teacher_subject/edit/:id',name:'teacher_subject_edit',component:TeacherSubjectEdit}, 
+
 
       {path:'/Admin/list',name:'list',component:List}, // 模版
     ]},
