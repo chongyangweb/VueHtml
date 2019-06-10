@@ -107,6 +107,21 @@ import TeacherSubject from '@/views/TeacherSubject/index.vue'
 import TeacherSubjectAdd from '@/views/TeacherSubject/add.vue'
 import TeacherSubjectEdit from '@/views/TeacherSubject/edit.vue'
 
+// 材料
+import TeacherMaterial from '@/views/TeacherMaterial/index.vue'
+import TeacherMaterialAdd from '@/views/TeacherMaterial/add.vue'
+import TeacherMaterialEdit from '@/views/TeacherMaterial/edit.vue'
+
+// 问题
+import TeacherQuestion from '@/views/TeacherQuestion/index.vue'
+import TeacherQuestionAdd from '@/views/TeacherQuestion/add.vue'
+import TeacherQuestionEdit from '@/views/TeacherQuestion/edit.vue'
+
+// 公共题库问题
+import TeacherQuestionPublic from '@/views/TeacherQuestionPublic/index.vue'
+import TeacherQuestionPublicAdd from '@/views/TeacherQuestionPublic/add.vue'
+import TeacherQuestionPublicEdit from '@/views/TeacherQuestionPublic/edit.vue'
+
 
 import List from './views/list.vue'
 
@@ -237,6 +252,22 @@ export default new Router({
       {path:'/Admin/teacher_subject/index',name:'teacher_subject_index',component:TeacherSubject}, 
       {path:'/Admin/teacher_subject/add',name:'teacher_subject_add',component:TeacherSubjectAdd}, 
       {path:'/Admin/teacher_subject/edit/:id',name:'teacher_subject_edit',component:TeacherSubjectEdit}, 
+
+      // 材料
+      {path:'/Admin/teacher_material/index',name:'teacher_material_index',component:TeacherMaterial}, 
+      {path:'/Admin/teacher_material/add',name:'teacher_material_add',component:TeacherMaterialAdd}, 
+      {path:'/Admin/teacher_material/edit/:id',name:'teacher_material_edit',component:TeacherMaterialEdit}, 
+
+      // 问题
+      {path:'/Admin/teacher_question/index',name:'teacher_question_index',component:TeacherQuestion}, 
+      {path:'/Admin/teacher_question/add',name:'teacher_question_add',component:TeacherQuestionAdd}, 
+      {path:'/Admin/teacher_question/edit/:id',name:'teacher_question_edit',component:TeacherQuestionEdit}, 
+
+
+      // 公共题库
+      {path:'/Admin/teacher_question_public/index',name:'teacher_question_public_index',component:TeacherQuestionPublic}, 
+      {path:'/Admin/teacher_question_public/add',name:'teacher_question_public_add',component:TeacherQuestionPublicAdd}, 
+      {path:'/Admin/teacher_question_public/edit/:id',name:'teacher_question_public_edit',component:TeacherQuestionPublicEdit}, 
 
 
       {path:'/Admin/list',name:'list',component:List}, // 模版
