@@ -122,6 +122,16 @@ import TeacherQuestionPublic from '@/views/TeacherQuestionPublic/index.vue'
 import TeacherQuestionPublicAdd from '@/views/TeacherQuestionPublic/add.vue'
 import TeacherQuestionPublicEdit from '@/views/TeacherQuestionPublic/edit.vue'
 
+// 我的班级
+import TeacherClass from '@/views/TeacherClass/index.vue'
+import TeacherClassAdd from '@/views/TeacherClass/add.vue'
+import TeacherClassEdit from '@/views/TeacherClass/edit.vue'
+
+// 我的班级
+import TeacherPaper from '@/views/TeacherPaper/index.vue'
+import TeacherPaperAdd from '@/views/TeacherPaper/add.vue'
+import TeacherPaperEdit from '@/views/TeacherPaper/edit.vue'
+
 
 import List from './views/list.vue'
 
@@ -269,6 +279,15 @@ export default new Router({
       {path:'/Admin/teacher_question_public/add',name:'teacher_question_public_add',component:TeacherQuestionPublicAdd}, 
       {path:'/Admin/teacher_question_public/edit/:id',name:'teacher_question_public_edit',component:TeacherQuestionPublicEdit}, 
 
+      // 我的班级
+      {path:'/Admin/teacher_class/index',name:'teacher_class_index',component:TeacherClass}, 
+      {path:'/Admin/teacher_class/add',name:'teacher_class_add',component:TeacherClassAdd}, 
+      {path:'/Admin/teacher_class/edit/:id',name:'teacher_class_edit',component:TeacherClassEdit}, 
+
+      // 我的试卷
+      {path:'/Admin/teacher_paper/index',name:'teacher_paper_index',component:TeacherPaper}, 
+      {path:'/Admin/teacher_paper/add',name:'teacher_paper_add',component:TeacherPaperAdd}, 
+      {path:'/Admin/teacher_paper/edit/:id',name:'teacher_paper_edit',component:TeacherPaperEdit}, 
 
       {path:'/Admin/list',name:'list',component:List}, // 模版
     ]},

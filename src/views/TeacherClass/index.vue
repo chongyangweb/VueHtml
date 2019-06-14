@@ -1,11 +1,11 @@
 <template>
 	<div class="index_main">
 		<div class="main_btn_left">
-			<router-link class="admin_fff_btn" :to="{name:'cat_add'}"><el-button type="primary" icon="el-icon-plus">添加</el-button></router-link>
+			<router-link class="admin_fff_btn" :to="{name:'teacher_class_add'}"><el-button type="primary" icon="el-icon-plus">添加</el-button></router-link>
 
 			<!-- <input class="index_search_input" type="text" placeholder="输入搜索内容"> -->
-			<el-input  class="search_input" size="small" v-model="name" placeholder="请输入内容"></el-input>
-			<el-button icon="el-icon-search" @click="search" plain>搜索</el-button>
+			<!-- <el-input  class="search_input" size="small" v-model="name" placeholder="请输入内容"></el-input>
+			<el-button icon="el-icon-search" @click="search" plain>搜索</el-button> -->
 
 			<el-button class="main_del_right" icon="el-icon-delete" type="danger" @click="del">批量删除</el-button>
 		</div>
@@ -20,30 +20,14 @@
 				<template slot-scope="scope">{{ scope.row.id }}</template>
 				</el-table-column>
 
-				<el-table-column label="栏目名" width="120">
+				<el-table-column label="班级名" >
 				<template slot-scope="scope">{{ scope.row.name }}</template>
-				</el-table-column>
-
-				<el-table-column label="父栏目" width="120">
-				<template slot-scope="scope">{{ scope.row.get_parent_name.name }}</template>
-				</el-table-column>
-
-				<el-table-column label="英名">
-				<template slot-scope="scope">{{ scope.row.ename }}</template>
-				</el-table-column>
-
-				<el-table-column label="链接">
-				<template slot-scope="scope">{{ scope.row.url }}</template>
-				</el-table-column>
-
-				<el-table-column label="排序">
-				<template slot-scope="scope">{{ scope.row.sort }}</template>
 				</el-table-column>
 
 				<el-table-column label="操作" width="180">
 				<template slot-scope="scope">
-				<!-- <el-button plain>查看</el-button> -->
-				<router-link :to="{name:'cat_edit',params:{id:scope.row.id}}"><el-button plain icon="el-icon-edit" >编辑</el-button></router-link>
+				<el-button plain>查看</el-button> &nbsp;
+				<router-link :to="{name:'teacher_class_edit',params:{id:scope.row.id}}"><el-button plain icon="el-icon-edit" >编辑</el-button></router-link>
 				</template>
 				</el-table-column>
 
@@ -89,7 +73,7 @@
 
 	      	var _this = this;
 	      	this.ids = this.ids.substr(0, this.ids.length - 1);
-	      	this.$post(this.ROOT_URL + 'Admin/cat/del',{id:this.ids}).then(function(res){
+	      	this.$post(this.ROOT_URL + 'Admin/teacher_class/del',{id:this.ids}).then(function(res){
 	      		_this.$message({
 		          message: '恭喜你，删除成功！',
 		          type: 'success'
@@ -107,14 +91,14 @@
 	      },
 	      search:function(){
 	      	var _this = this;
-	    	_this.$post(this.ROOT_URL + 'Admin/cat/index',{limit:this.page.limit,page:this.page.page,name:this.name}).then(function(res){
+	    	_this.$post(this.ROOT_URL + 'Admin/teacher_class/index',{limit:this.page.limit,page:this.page.page,name:this.name}).then(function(res){
 	    		_this.lists = res.data;
 	    		_this.page = res.page;
 	    	});
 	      },
 	      getList:function(){
 	      	var _this = this;
-	    	_this.$post(this.ROOT_URL + 'Admin/cat/index',{limit:this.page.limit,page:this.page.page}).then(function(res){
+	    	_this.$post(this.ROOT_URL + 'Admin/teacher_class/index',{limit:this.page.limit,page:this.page.page}).then(function(res){
 	    		_this.lists = res.data;
 	    		_this.page = res.page;
 	    	});
