@@ -26,7 +26,7 @@
 
 				<el-table-column label="操作" width="180">
 				<template slot-scope="scope">
-				<el-button plain>查看</el-button> &nbsp;
+				<router-link :to="{name:'teacher_paper_question',params:{id:scope.row.id}}"><el-button plain>查看</el-button></router-link> &nbsp;
 				<router-link :to="{name:'teacher_paper_edit',params:{id:scope.row.id}}"><el-button plain icon="el-icon-edit" >编辑</el-button></router-link>
 				</template>
 				</el-table-column>

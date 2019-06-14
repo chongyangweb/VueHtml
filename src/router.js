@@ -127,10 +127,16 @@ import TeacherClass from '@/views/TeacherClass/index.vue'
 import TeacherClassAdd from '@/views/TeacherClass/add.vue'
 import TeacherClassEdit from '@/views/TeacherClass/edit.vue'
 
-// 我的班级
+// 我的试卷
 import TeacherPaper from '@/views/TeacherPaper/index.vue'
 import TeacherPaperAdd from '@/views/TeacherPaper/add.vue'
 import TeacherPaperEdit from '@/views/TeacherPaper/edit.vue'
+
+// 试卷问题处理
+import TeacherPaperQuestion from '@/views/TeacherPaper/info.vue'
+
+// 班级成员
+import TeacherClassUser from '@/views/TeacherClass/info.vue'
 
 
 import List from './views/list.vue'
@@ -284,10 +290,17 @@ export default new Router({
       {path:'/Admin/teacher_class/add',name:'teacher_class_add',component:TeacherClassAdd}, 
       {path:'/Admin/teacher_class/edit/:id',name:'teacher_class_edit',component:TeacherClassEdit}, 
 
+      // 班级成员
+      {path:'/Admin/teacher_class_user/:id',name:'teacher_class_user',component:TeacherClassUser}, 
+
       // 我的试卷
       {path:'/Admin/teacher_paper/index',name:'teacher_paper_index',component:TeacherPaper}, 
       {path:'/Admin/teacher_paper/add',name:'teacher_paper_add',component:TeacherPaperAdd}, 
       {path:'/Admin/teacher_paper/edit/:id',name:'teacher_paper_edit',component:TeacherPaperEdit}, 
+
+      {path:'/Admin/teacher_paper_question/:id',name:'teacher_paper_question',component:TeacherPaperQuestion}, // 试卷题目处理
+
+
 
       {path:'/Admin/list',name:'list',component:List}, // 模版
     ]},
