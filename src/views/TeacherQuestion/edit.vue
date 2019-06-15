@@ -70,6 +70,15 @@
 			<div class="unline2"></div>
 
 			<el-row :gutter="20">
+				<el-col :span="3"><div class="input_lable">选择材料</div></el-col>
+				<el-col :span="3">
+					<el-button type="success" @click="open_dialog()">选择材料</el-button>
+				</el-col>
+				<el-col :span="18"><div class="input_notice">{{material_title}}</div></el-col>
+			</el-row>
+			<div class="unline2"></div>
+
+			<el-row :gutter="20">
 				<el-col :span="3"><div class="input_lable">添加选项</div></el-col>
 				<el-col :span="10">
 					<el-button type="success" @click="dialogFormVisible = true">添加选项</el-button>
@@ -180,6 +189,30 @@
 		    <el-button type="primary" @click="add_answer()">确 定</el-button>
 		  </div>
 		</el-dialog>
+
+		<!-- 材料 -->
+		<el-dialog title="材料列表" :visible.sync="dialogTableVisible2">
+		  <el-table :data="gridData">
+		    <el-table-column property="id" label="ID" width="150"></el-table-column>
+		    <el-table-column property="title" label="标题" width="200"></el-table-column>
+		    <el-table-column
+		      align="right" >
+		      <template slot="header" slot-scope="scope">
+		        <el-input
+		          v-model="search"
+		          @change="search_change"
+		          size="mini"
+		          placeholder="输入关键字搜索"/>
+		      </template>
+		      <template slot-scope="scope">
+		        <el-button
+		          size="mini"
+		          type="primary"
+		          @click="handleChose(scope.$index, scope.row)">选择</el-button>
+		      </template>
+		    </el-table-column>
+		  </el-table>
+		</el-dialog>
 			
 		</div>
 		
@@ -206,9 +239,14 @@
 	        radio:0,
 	        tableData:[],
 	        dialogFormVisible:false,
+	        dialogTableVisible2:false,
 	        textarea:'',
 	        radio2:0,
 	        is_answer:false,
+	        search:'',
+	        gridData:[],
+	        material_id:0,
+	        material_title:'无材料',
 	      };
 	    },
 	    methods: {
@@ -269,7 +307,31 @@
 	      },
 	      del_answer:function(e){
 	      	this.tableData.splice(e,1);
-	      }
+	      },
+	      get_material:function(){
+	      	
+	      	var _this = this;
+	      	this.$post(_this.ROOT_URL + "Admin/teacher_material/bind_question",{search:this.search}).then(function(res){
+	      		_this.dialogTableVisible2 = true;
+	      		_this.gridData = res.data;
+	      		// console.log(res.data);
+	      	});
+	      	
+	      },
+	      handleChose:function(a,b){
+	      	// console.log(a,b);
+	      	this.material_id = b.id;
+	      	this.material_title = b.title;
+	      	this.dialogTableVisible2 = false;
+	      },
+	      open_dialog:function(){
+	      	this.get_material();
+	      },
+	      search_change:function(e){
+	      	// console.log(e);
+	      	this.search = e;
+	      	this.get_material();
+	      },
 	    },
 	    created:function(){
 	    	
@@ -294,6 +356,11 @@
 	    		_this.parent2 = res.subject;
 	    		_this.title = res.info.title;
 	    		_this.is_type = res.info.radio;
+	    		if(res.info.material_id != 0){
+	    			_this.material_id = res.info.material_id;
+	    			_this.material_title = res.material.title;
+	    		}
+	    		
 
 	    		_this.tableData = res.answer;
 	    		if(res.info.subject_id != 0){

@@ -70,6 +70,15 @@
 			<div class="unline2"></div>
 
 			<el-row :gutter="20">
+				<el-col :span="3"><div class="input_lable">选择材料</div></el-col>
+				<el-col :span="3">
+					<el-button type="success" @click="open_dialog()">选择材料</el-button>
+				</el-col>
+				<el-col :span="18"><div class="input_notice">{{material_title}}</div></el-col>
+			</el-row>
+			<div class="unline2"></div>
+
+			<el-row :gutter="20">
 				<el-col :span="3"><div class="input_lable">添加选项</div></el-col>
 				<el-col :span="10">
 					<el-button type="success" @click="dialogFormVisible = true">添加选项</el-button>
@@ -181,6 +190,28 @@
 		  </div>
 		</el-dialog>
 
+		<el-dialog title="材料列表" :visible.sync="dialogTableVisible2">
+		  <el-table :data="gridData">
+		    <el-table-column property="id" label="ID" width="150"></el-table-column>
+		    <el-table-column property="title" label="标题" width="200"></el-table-column>
+		    <el-table-column
+		      align="right" >
+		      <template slot="header" slot-scope="scope">
+		        <el-input
+		          v-model="search"
+		          size="mini" @change="search_change"
+		          placeholder="输入关键字搜索"/>
+		      </template>
+		      <template slot-scope="scope">
+		        <el-button
+		          size="mini"
+		          type="primary"
+		          @click="handleChose(scope.$index, scope.row)">选择</el-button>
+		      </template>
+		    </el-table-column>
+		  </el-table>
+		</el-dialog>
+
 		
 	</div>
 </template>
@@ -206,15 +237,20 @@
 	        radio:0,
 	        tableData:[],
 	        dialogFormVisible:false,
+	        dialogTableVisible2:false,
 	        textarea:'',
 	        radio2:0,
 	        is_answer:false,
+	        search:'',
+	        gridData:[],
+	        material_id:0,
+	        material_title:'无材料',
 	      };
 	    },
 	    methods: {
 	      submit:function(){
 	      	var _this = this;
-	      	this.$post(this.ROOT_URL + 'Admin/teacher_question/add',{title:this.title,answer:this.tableData,grade_id:this.grade_id,subject_id:this.subject_id,is_type:this.radio}).then(function(res){
+	      	this.$post(this.ROOT_URL + 'Admin/teacher_question/add',{title:this.title,answer:this.tableData,grade_id:this.grade_id,subject_id:this.subject_id,is_type:this.radio,material_id:this.material_id}).then(function(res){
 	      		_this.$message({
 		          message: '恭喜你，添加成功！',
 		          type: 'success'
@@ -263,7 +299,29 @@
 	      },
 	      del_answer:function(e){
 	      	this.tableData.splice(e,1);
-	      }
+	      },
+	      get_material:function(){
+	      	var _this = this;
+	      	this.$post(_this.ROOT_URL + "Admin/teacher_material/bind_question",{search:this.search}).then(function(res){
+	      		_this.dialogTableVisible2 = true;
+	      		_this.gridData = res.data;
+	      		// console.log(res.data);
+	      	});
+	      },
+	      handleChose:function(a,b){
+	      	// console.log(a,b);
+	      	this.material_id = b.id;
+	      	this.material_title = b.title;
+	      	this.dialogTableVisible2 = false;
+	      },
+	      open_dialog:function(){
+	      	this.get_material();
+	      },
+	      search_change:function(e){
+	      	// console.log(e);
+	      	this.search = e;
+	      	this.get_material();
+	      },
 	    },
 	    created:function(){
 	    	
@@ -290,7 +348,7 @@
 		
 	    },
 	    handleRemove(file, fileList) {
-        	console.log(file, fileList);
+        	// console.log(file, fileList);
       	},
 	  };
 </script>

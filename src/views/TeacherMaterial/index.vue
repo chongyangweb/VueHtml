@@ -20,8 +20,8 @@
 				<template slot-scope="scope">{{ scope.row.id }}</template>
 				</el-table-column>
 
-				<el-table-column label="科目名" >
-				<template slot-scope="scope">{{ scope.row.name }}</template>
+				<el-table-column label="材料标题" >
+				<template slot-scope="scope">{{ scope.row.title }}</template>
 				</el-table-column>
 
 				<el-table-column label="操作" width="180">
