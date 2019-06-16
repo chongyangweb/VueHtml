@@ -72,7 +72,8 @@
 			<el-row :gutter="20">
 				<el-col :span="3"><div class="input_lable">选择材料</div></el-col>
 				<el-col :span="3">
-					<el-button type="success" @click="open_dialog()">选择材料</el-button>
+					<el-button type="success" @click="open_dialog()" v-show="material_id<=0">选择材料</el-button>
+					<el-button type="success" @click="del_material()" v-show="material_id>0">删除材料</el-button>
 				</el-col>
 				<el-col :span="18"><div class="input_notice">{{material_title}}</div></el-col>
 			</el-row>
@@ -132,11 +133,11 @@
 			</el-row>
 			<div class="unline2"></div>
 
-			<el-row :gutter="20" v-show="radio==1">
-				<el-col :span="3"><div class="input_lable">内容</div></el-col>
+			<el-row :gutter="20">
+				<el-col :span="3"><div class="input_lable">答案解析</div></el-col>
 				<el-col :span="18">
 				<div id="editor">
-			    </div><textarea v-model="content" style="display:none;"></textarea></el-col>
+			    </div><textarea v-model="content" style="display:none;z-index:3;"></textarea></el-col>
 				<el-col :span="13"><div class="input_notice"></div></el-col>
 			</el-row>
 			<div class="unline2"></div>
@@ -252,7 +253,7 @@
 	    methods: {
 	      submit:function(){
 	      	var _this = this;
-	      	this.$post(this.ROOT_URL + 'Admin/teacher_question/edit/' + this.$route.params.id ,{title:this.title,answer:this.tableData,grade_id:this.grade_id,subject_id:this.subject_id,is_type:this.radio}).then(function(res){
+	      	this.$post(this.ROOT_URL + 'Admin/teacher_question/edit/' + this.$route.params.id ,{title:this.title,answer:this.tableData,grade_id:this.grade_id,subject_id:this.subject_id,is_type:this.radio,material_id:this.material_id,analysis:this.content}).then(function(res){
 	      		_this.$message({
 		          message: '恭喜你，修改成功！',
 		          type: 'success'
@@ -332,6 +333,10 @@
 	      	this.search = e;
 	      	this.get_material();
 	      },
+	      del_material:function(){
+	      	this.material_id = 0;
+	      	this.material_title = '无材料';
+	      },
 	    },
 	    created:function(){
 	    	
@@ -347,6 +352,7 @@
         	E.customConfig.uploadImgServer = this.ROOT_URL + 'Admin/Auto/content_upload?token=' + this.getToken();
         	E.customConfig.uploadFileName = 'file';
         	E.customConfig.uploadImgMaxSize = 3 * 1024 * 1024;
+        	E.customConfig.zIndex  = 1;
 		    E.create();
 		    
 
@@ -355,6 +361,7 @@
 	    		_this.parent = res.grade;
 	    		_this.parent2 = res.subject;
 	    		_this.title = res.info.title;
+	    		_this.content = res.info.analysis;
 	    		_this.is_type = res.info.radio;
 	    		if(res.info.material_id != 0){
 	    			_this.material_id = res.info.material_id;
