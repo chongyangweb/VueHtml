@@ -74,7 +74,7 @@
 		</div>
 
 		<div class="order_info_total_price">
-			总计：￥ 225.00
+			总计：￥ {{total_price}}
 		</div>
 
 		<div class="clear"></div>
@@ -102,6 +102,7 @@
 		    	receive_tel:'',
 		    	receive_name:'',
 		    	data:null,
+		    	total_price:0.00,
 		    }
 	    },
 	    mounted(){
@@ -117,6 +118,7 @@
 	    		_this.receive_tel = res.data.receive_tel;
 	    		_this.receive_name = res.data.receive_name;
 	    		_this.order_no = res.data.order_no;
+	    		_this.total_price = res.data.price;
 
 	    	});
 	    },

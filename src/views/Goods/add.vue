@@ -81,6 +81,13 @@
 					<div class="unline2"></div>
 
 					<el-row :gutter="20">
+						<el-col :span="3"><div class="input_lable">库存</div></el-col>
+						<el-col :span="10"><el-input size="small" type="number" v-model="num" placeholder="0"></el-input></el-col>
+						<el-col :span="11"><div class="input_notice"></div></el-col>
+					</el-row>
+					<div class="unline2"></div>
+
+					<el-row :gutter="20">
 						<el-col :span="3"><div class="input_lable">内容</div></el-col>
 						<el-col :span="18">
 						<div id="editor">
@@ -188,6 +195,7 @@
 	      	goods_no:'',
 	      	sub_title:'',
 	      	content:'',
+	      	num:'9999',
 	      	is_hot:'0',
 	      	is_top:'0',
 	      	is_sale:'1',
