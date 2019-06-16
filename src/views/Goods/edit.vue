@@ -218,7 +218,7 @@
 	    methods: {
 	      submit:function(){
 	      	var _this = this;
-	      	this.$post(this.ROOT_URL + 'Admin/goods/edit/'+ this.$route.params.id,{title:this.title,goods_no:this.goods_no,brand_id:this.brand_id,price:this.price,content:this.content,is_hot:this.is_hot,is_top:this.is_top,thumb:this.thumb,cid:this.cid,user_id:this.user_id,sub_title:this.sub_title,is_sale:this.is_sale}).then(function(res){
+	      	this.$post(this.ROOT_URL + 'Admin/goods/edit/'+ this.$route.params.id,{title:this.title,goods_no:this.goods_no,brand_id:this.brand_id,price:this.price,content:this.content,num:this.num,is_hot:this.is_hot,is_top:this.is_top,thumb:this.thumb,cid:this.cid,user_id:this.user_id,sub_title:this.sub_title,is_sale:this.is_sale}).then(function(res){
 	      		_this.$message({
 		          message: '恭喜你，添加成功！',
 		          type: 'success'
@@ -248,7 +248,7 @@
 	      },
 	      nextto:function(){
 	      	var _this = this;
-	      	this.$post(this.ROOT_URL + 'Admin/goods/add',{title:this.title,goods_no:this.goods_no,brand_id:this.brand_id,price:this.price,content:this.content,is_hot:this.is_hot,is_top:this.is_top,thumb:this.thumb,cid:this.cid,user_id:this.user_id,sub_title:this.sub_title,is_sale:this.is_sale}).then(function(res){
+	      	this.$post(this.ROOT_URL + 'Admin/goods/add',{title:this.title,goods_no:this.goods_no,brand_id:this.brand_id,price:this.price,content:this.content,is_hot:this.is_hot,is_top:this.is_top,num:this.num,thumb:this.thumb,cid:this.cid,user_id:this.user_id,sub_title:this.sub_title,is_sale:this.is_sale}).then(function(res){
 	      		_this.$message({
 		          message: '恭喜你，添加成功！',
 		          type: 'success'
