@@ -8,6 +8,7 @@ import '../public/fonts/iconfont.css' // 公共类
 // import './plugins/element.js' // element Ui 库
 import {formatDate} from './plugins/function.js' // 辅助js 库
 import {post,get,put,deletes,toJson,isEmpty} from './plugins/http.js' // axios
+import md5 from 'js-md5'; // md5
 
 //定义全局变量
 Vue.prototype.$post=post;
@@ -16,6 +17,7 @@ Vue.prototype.$put=put;
 Vue.prototype.$delete=deletes;
 Vue.prototype.$toJson=toJson;
 Vue.prototype.$isEmpty=isEmpty;
+Vue.prototype.$md5=md5;
 
 Vue.filter('formatDate', function (time) {
     var date = new Date(time*1000);

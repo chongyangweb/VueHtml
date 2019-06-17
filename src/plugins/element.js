@@ -33,6 +33,7 @@ Radio,
 Progress,
 Dialog,
 RadioGroup,
+DatePicker,
 } from 'element-ui'
 
 Vue.prototype.$ELEMENT = { size: 'mini', zIndex: 3000 };
@@ -68,4 +69,5 @@ Vue.use(Switch);
 Vue.use(Progress);
 Vue.use(Dialog);
 Vue.use(RadioGroup);
+Vue.use(DatePicker);
 Vue.prototype.$message = Message;

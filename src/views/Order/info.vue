@@ -78,6 +78,23 @@
 		</div>
 
 		<div class="clear"></div>
+
+		<div class="unline"></div>
+		<br>
+		<br>
+		<div class="main_btn_left">
+			<div class="index_main_title"><font>快递信息</font></div>
+		</div>
+		<div class="unline"></div>
+
+		<div class="delivery_content" v-show="delivery_content.length==0">
+			<div style="text-align: center;color:#999">没有快递号！</div>
+		</div>
+
+		<div class="delivery_content" v-show="delivery_content.length>0">
+			<p v-for="v in delivery_content"><font style="margin-right: 1rem;color:#000;">{{v.AcceptTime}}</font>-{{v.AcceptStation}}</p>
+		</div>
+		<div class="unline"></div>
 		
 	</div>
 </template>
@@ -87,9 +104,12 @@
 	margin-bottom: 20px;
 }
 .order_info_total_price{float: right;color:red;line-height: 60px;}
+.delivery_content{margin-bottom: 2rem;}
+.delivery_content p{line-height: 2rem;}
 </style>
 
 <script>
+	let Base64 = require('js-base64').Base64
 	export default {
 	    data() {
 		    return {
@@ -101,9 +121,55 @@
 		    	address:'',
 		    	receive_tel:'',
 		    	receive_name:'',
-		    	data:null,
+		    	data:{},
 		    	total_price:0.00,
+		    	delivery_content:[],
+		    	ShipperCode:'',
 		    }
+	    },
+	    methods:{
+	    	get_delivery_name:function(){
+
+	    		if(this.data.delivery_no == ''){
+	    			return;
+	    		}
+
+	    		var _this = this;
+	    		var delivery_url = 'http://api.kdniao.com/Ebusiness/EbusinessOrderHandle.aspx'; // API
+	    		var RequestData = "{'LogisticCode':'"+this.data.delivery_no+"'}"; // 快递单号
+	    		var RequestType = '2002';
+	    		var EBusinessID = '1542264'; // 商户ID
+	    		var key = "52c8ce3d-59a6-491a-ac75-aa5cd844bf1e" // key
+	    		var DataSign = encodeURIComponent(Base64.encode(this.$md5(RequestData+key))); // 签名
+	    		var DataType = 'json'; // 返回类型
+	    		// console.log(RequestData);
+	    		this.$post(delivery_url,{RequestData:RequestData,RequestType:RequestType,EBusinessID:EBusinessID,DataSign:DataSign,DataType:DataType}).then(function(res){
+	    			if(res.Success == true){
+	    				_this.ShipperCode = res.Shippers[0].ShipperCode;
+	    				_this.get_delivery_content();
+	    			}else{
+	    				return false;
+	    			}
+	    		});
+	    		
+	    	},
+	    	get_delivery_content:function(){
+	    		var _this = this;
+	    		var delivery_url = 'http://api.kdniao.com/Ebusiness/EbusinessOrderHandle.aspx'; // API
+	    		var RequestData = "{'LogisticCode':'"+this.data.delivery_no+"','ShipperCode':'"+this.ShipperCode+"'}"; // 快递单号
+	    		var RequestType = '1002';
+	    		var EBusinessID = '1542264'; // 商户ID
+	    		var key = "52c8ce3d-59a6-491a-ac75-aa5cd844bf1e" // key
+	    		var DataSign = encodeURIComponent(Base64.encode(this.$md5(RequestData+key))); // 签名
+	    		var DataType = 'json'; // 返回类型
+
+	    		this.$post(delivery_url,{RequestData:RequestData,RequestType:RequestType,EBusinessID:EBusinessID,DataSign:DataSign,DataType:DataType}).then(function(res){
+	    			if(res.Success == true){
+	    				_this.delivery_content = res.Traces;
+	    			}
+	    		});
+
+	    	},
 	    },
 	    mounted(){
 	    	var id = this.$route.params.id;
@@ -119,8 +185,11 @@
 	    		_this.receive_name = res.data.receive_name;
 	    		_this.order_no = res.data.order_no;
 	    		_this.total_price = res.data.price;
+	    		_this.get_delivery_name();
 
 	    	});
+
+	    	
 	    },
 	}
 </script>
