@@ -77,6 +77,14 @@ import GoodsSlide from '@/views/GoodsSlide/index.vue'
 import GoodsSlideAdd from '@/views/GoodsSlide/add.vue'
 import GoodsSlideEdit from '@/views/GoodsSlide/edit.vue'
 
+// 快递模版
+import GoodsDelivery from '@/views/GoodsDelivery/index.vue'
+import GoodsDeliveryAdd from '@/views/GoodsDelivery/add.vue'
+import GoodsDeliveryEdit from '@/views/GoodsDelivery/edit.vue'
+
+// 地区代理
+import GoodsArea from '@/views/GoodsArea/index.vue'
+
 // 商品评论
 import GoodsComment from '@/views/GoodsComment/index.vue'
 
@@ -239,6 +247,14 @@ export default new Router({
       {path:'/Admin/goods_slide/index',name:'goods_slide_index',component:GoodsSlide}, 
       {path:'/Admin/goods_slide/add',name:'goods_slide_add',component:GoodsSlideAdd}, 
       {path:'/Admin/goods_slide/edit/:id',name:'goods_slide_edit',component:GoodsSlideEdit},
+
+      // 快递模版
+      {path:'/Admin/goods_delivery/index',name:'goods_delivery_index',component:GoodsDelivery}, 
+      {path:'/Admin/goods_delivery/add',name:'goods_delivery_add',component:GoodsDeliveryAdd}, 
+      {path:'/Admin/goods_delivery/edit/:id',name:'goods_delivery_edit',component:GoodsDeliveryEdit},
+
+      // 地区代理
+      {path:'/Admin/goods_area/index',name:'goods_area_index',component:GoodsArea}, 
 
       // 订单列表
       {path:'/Admin/order/index',name:'order_index',component:Order}, 
