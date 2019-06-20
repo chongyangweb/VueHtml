@@ -143,6 +143,9 @@ import TeacherPaperEdit from '@/views/TeacherPaper/edit.vue'
 // 试卷问题处理
 import TeacherPaperQuestion from '@/views/TeacherPaper/info.vue'
 
+// 教师广告
+import TeacherGg from '@/views/TeacherGg/index.vue'
+
 // 班级成员
 import TeacherClassUser from '@/views/TeacherClass/info.vue'
 
@@ -308,6 +311,9 @@ export default new Router({
 
       // 班级成员
       {path:'/Admin/teacher_class_user/:id',name:'teacher_class_user',component:TeacherClassUser}, 
+
+      // 教师广告
+      {path:'/Admin/teacher_gg/index',name:'teacher_gg_index',component:TeacherGg}, 
 
       // 我的试卷
       {path:'/Admin/teacher_paper/index',name:'teacher_paper_index',component:TeacherPaper}, 

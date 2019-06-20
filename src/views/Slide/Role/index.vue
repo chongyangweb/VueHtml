@@ -46,6 +46,7 @@
 		    	ids:null,
 		    	page:[],
 		    	name:'',
+
 		    }
 	    },
 	    methods: {
@@ -69,6 +70,7 @@
 	      	}
 	      },
 	      del:function(){
+
 	      	var _this = this;
 	      	this.ids = this.ids.substr(0, this.ids.length - 1);
 	      	this.$post(this.ROOT_URL + 'Admin/role/del',{id:this.ids}).then(function(res){
@@ -101,6 +103,9 @@
 	    		_this.page = res.page;
 	    	});
 	      }
+
+
+
 	      
 	    },
 	    created:function(){

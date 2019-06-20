@@ -68,13 +68,11 @@
 	      			index = i;
 	      		}
 	      	}
-
 	      	if(index == null){
 	      		this.perssion.push(val);
 	      	}else{
 	      		this.perssion.splice(index,1);
 	      	}
-
 	      	this.perssionStr = this.perssion.join(',');
 	      }
 	    },
