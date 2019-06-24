@@ -95,6 +95,9 @@ import OrderInfo from '@/views/Order/info.vue'
 // 售后服务
 import GoodsServerEdit from '@/views/GoodsServer/edit.vue'
 
+// 店铺信息
+import GoodsShop from '@/views/GoodsShop/edit.vue'
+
 // 微信公众号
 // 商品栏目
 import WechatCat from '@/views/WechatCat/index.vue'
@@ -268,6 +271,9 @@ export default new Router({
 
       // 售后服务
       {path:'/Admin/goods_server/edit',name:'goods_server_edit',component:GoodsServerEdit}, 
+
+      // 店铺信息设置
+      {path:'/Admin/goods_shop/edit',name:'goods_shop_edit',component:GoodsShop}, 
 
       // 微信公众号
       {path:'/Admin/wechat_cat/index',name:'wechat_cat_index',component:WechatCat}, 
