@@ -1,161 +1,161 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Home from './views/Home.vue'
-import Login from './views/login.vue'
-import Index from './views/index.vue'
-import Default from './views/default2.vue'
-import System from '@/views/System/index.vue'
-import Version from '@/views/Version/index.vue'
-import Task from '@/views/Task/index.vue'
+// import  Vue from 'vue'
+import  Router from 'vue-router'
+const  Home = () => import ('./views/Home.vue')
+const  Login = () => import('./views/login.vue')
+const  Index = () => import('./views/index.vue')
+const  Default = () => import('./views/default2.vue')
+const  System = () => import('@/views/System/index.vue')
+const  Version = () => import('@/views/Version/index.vue')
+const  Task = () => import('@/views/Task/index.vue')
 
 // 404视图
-import Error404 from '@/views/Error/404.vue'
+const  Error404 = () => import('@/views/Error/404.vue')
 
 // 栏目
-import Cat from '@/views/Cat/index.vue'
-import CatAdd from '@/views/Cat/add.vue'
-import CatEdit from '@/views/Cat/edit.vue'
+const  Cat = () => import('@/views/Cat/index.vue')
+const  CatAdd = () => import('@/views/Cat/add.vue')
+const  CatEdit = () => import('@/views/Cat/edit.vue')
 
 // 角色
-import Role from '@/views/Role/index.vue'
-import RoleAdd from '@/views/Role/add.vue'
-import RoleEdit from '@/views/Role/edit.vue'
+const  Role = () => import('@/views/Role/index.vue')
+const  RoleAdd = () => import('@/views/Role/add.vue')
+const  RoleEdit = () => import('@/views/Role/edit.vue')
 
 // 用户
-import User from '@/views/User/index.vue'
-import UserAdd from '@/views/User/add.vue'
-import UserEdit from '@/views/User/edit.vue'
+const  User = () => import('@/views/User/index.vue')
+const  UserAdd = () => import('@/views/User/add.vue')
+const  UserEdit = () => import('@/views/User/edit.vue')
 
 // 幻灯片
-import Slide from '@/views/Slide/index.vue'
-import SlideAdd from '@/views/Slide/add.vue'
-import SlideEdit from '@/views/Slide/edit.vue'
+const  Slide = () => import('@/views/Slide/index.vue')
+const  SlideAdd = () => import('@/views/Slide/add.vue')
+const  SlideEdit = () => import('@/views/Slide/edit.vue')
 
 // 其他设置
-import OtherSetting from '@/views/OtherSetting/index.vue'
+const  OtherSetting = () => import('@/views/OtherSetting/index.vue')
 
 // 配置 微信app_id等
-import Config from '@/views/Config/index.vue'
+const  Config = () => import('@/views/Config/index.vue')
 
 // 栏目管理
-import Columns from '@/views/Columns/index.vue'
-import ColumnsAdd from '@/views/Columns/add.vue'
-import ColumnsEdit from '@/views/Columns/edit.vue'
+const  Columns = () => import('@/views/Columns/index.vue')
+const  ColumnsAdd = () => import('@/views/Columns/add.vue')
+const  ColumnsEdit = () => import('@/views/Columns/edit.vue')
 
 // 文章管理
-import Article from '@/views/Article/index.vue'
-import ArticleAdd from '@/views/Article/add.vue'
-import ArticleEdit from '@/views/Article/edit.vue'
+const  Article = () => import('@/views/Article/index.vue')
+const  ArticleAdd = () => import('@/views/Article/add.vue')
+const  ArticleEdit = () => import('@/views/Article/edit.vue')
 
 // 产品管理
-import Product from '@/views/Product/index.vue'
-import ProductAdd from '@/views/Product/add.vue'
-import ProductEdit from '@/views/Product/edit.vue'
+const  Product = () => import('@/views/Product/index.vue')
+const  ProductAdd = () => import('@/views/Product/add.vue')
+const  ProductEdit = () => import('@/views/Product/edit.vue')
 
 // 专题管理
-import Seminar from '@/views/Seminar/index.vue'
-import SeminarAdd from '@/views/Seminar/add.vue'
-import SeminarEdit from '@/views/Seminar/edit.vue'
+const  Seminar = () => import('@/views/Seminar/index.vue')
+const  SeminarAdd = () => import('@/views/Seminar/add.vue')
+const  SeminarEdit = () => import('@/views/Seminar/edit.vue')
 
 // 商品管理
-import Goods from '@/views/Goods/index.vue'
-import GoodsAdd from '@/views/Goods/add.vue'
-import GoodsEdit from '@/views/Goods/edit.vue'
+const  Goods = () => import('@/views/Goods/index.vue')
+const  GoodsAdd = () => import('@/views/Goods/add.vue')
+const  GoodsEdit = () => import('@/views/Goods/edit.vue')
 
 // 商品栏目
-import GoodsCat from '@/views/GoodsCat/index.vue'
-import GoodsCatAdd from '@/views/GoodsCat/add.vue'
-import GoodsCatEdit from '@/views/GoodsCat/edit.vue'
+const  GoodsCat = () => import('@/views/GoodsCat/index.vue')
+const  GoodsCatAdd = () => import('@/views/GoodsCat/add.vue')
+const  GoodsCatEdit = () => import('@/views/GoodsCat/edit.vue')
 
 // 商品品牌
-import GoodsBrand from '@/views/GoodsBrand/index.vue'
-import GoodsBrandAdd from '@/views/GoodsBrand/add.vue'
-import GoodsBrandEdit from '@/views/GoodsBrand/edit.vue'
+const  GoodsBrand = () => import('@/views/GoodsBrand/index.vue')
+const  GoodsBrandAdd = () => import('@/views/GoodsBrand/add.vue')
+const  GoodsBrandEdit = () => import('@/views/GoodsBrand/edit.vue')
 
 // 店铺幻灯片
-import GoodsSlide from '@/views/GoodsSlide/index.vue'
-import GoodsSlideAdd from '@/views/GoodsSlide/add.vue'
-import GoodsSlideEdit from '@/views/GoodsSlide/edit.vue'
+const  GoodsSlide = () => import('@/views/GoodsSlide/index.vue')
+const  GoodsSlideAdd = () => import('@/views/GoodsSlide/add.vue')
+const  GoodsSlideEdit = () => import('@/views/GoodsSlide/edit.vue')
 
 // 快递模版
-import GoodsDelivery from '@/views/GoodsDelivery/index.vue'
-import GoodsDeliveryAdd from '@/views/GoodsDelivery/add.vue'
-import GoodsDeliveryEdit from '@/views/GoodsDelivery/edit.vue'
+const  GoodsDelivery = () => import('@/views/GoodsDelivery/index.vue')
+const  GoodsDeliveryAdd = () => import('@/views/GoodsDelivery/add.vue')
+const  GoodsDeliveryEdit = () => import('@/views/GoodsDelivery/edit.vue')
 
 // 地区代理
-import GoodsArea from '@/views/GoodsArea/index.vue'
+const  GoodsArea = () => import('@/views/GoodsArea/index.vue')
 
 // 商品评论
-import GoodsComment from '@/views/GoodsComment/index.vue'
+const  GoodsComment = () => import('@/views/GoodsComment/index.vue')
 
 // 订单列表
-import Order from '@/views/Order/index.vue'
-import OrderInfo from '@/views/Order/info.vue'
+const  Order = () => import('@/views/Order/index.vue')
+const  OrderInfo = () => import('@/views/Order/info.vue')
 
 // 售后服务
-import GoodsServerEdit from '@/views/GoodsServer/edit.vue'
+const  GoodsServerEdit = () => import('@/views/GoodsServer/edit.vue')
 
 // 店铺信息
-import GoodsShop from '@/views/GoodsShop/edit.vue'
+const  GoodsShop = () => import('@/views/GoodsShop/edit.vue')
 
 // 微信公众号
 // 商品栏目
-import WechatCat from '@/views/WechatCat/index.vue'
-import WechatCatAdd from '@/views/WechatCat/add.vue'
-import WechatCatEdit from '@/views/WechatCat/edit.vue'
+const  WechatCat = () => import('@/views/WechatCat/index.vue')
+const  WechatCatAdd = () => import('@/views/WechatCat/add.vue')
+const  WechatCatEdit = () => import('@/views/WechatCat/edit.vue')
 
 /****
  * 答题系统
 ***/
 
 // 年级
-import TeacherGrade from '@/views/TeacherGrade/index.vue'
-import TeacherGradeAdd from '@/views/TeacherGrade/add.vue'
-import TeacherGradeEdit from '@/views/TeacherGrade/edit.vue'
+const  TeacherGrade = () => import('@/views/TeacherGrade/index.vue')
+const  TeacherGradeAdd = () => import('@/views/TeacherGrade/add.vue')
+const  TeacherGradeEdit = () => import('@/views/TeacherGrade/edit.vue')
 
 // 科目
-import TeacherSubject from '@/views/TeacherSubject/index.vue'
-import TeacherSubjectAdd from '@/views/TeacherSubject/add.vue'
-import TeacherSubjectEdit from '@/views/TeacherSubject/edit.vue'
+const  TeacherSubject = () => import('@/views/TeacherSubject/index.vue')
+const  TeacherSubjectAdd = () => import('@/views/TeacherSubject/add.vue')
+const  TeacherSubjectEdit = () => import('@/views/TeacherSubject/edit.vue')
 
 // 材料
-import TeacherMaterial from '@/views/TeacherMaterial/index.vue'
-import TeacherMaterialAdd from '@/views/TeacherMaterial/add.vue'
-import TeacherMaterialEdit from '@/views/TeacherMaterial/edit.vue'
+const  TeacherMaterial = () => import('@/views/TeacherMaterial/index.vue')
+const  TeacherMaterialAdd = () => import('@/views/TeacherMaterial/add.vue')
+const  TeacherMaterialEdit = () => import('@/views/TeacherMaterial/edit.vue')
 
 // 问题
-import TeacherQuestion from '@/views/TeacherQuestion/index.vue'
-import TeacherQuestionAdd from '@/views/TeacherQuestion/add.vue'
-import TeacherQuestionEdit from '@/views/TeacherQuestion/edit.vue'
+const  TeacherQuestion = () => import('@/views/TeacherQuestion/index.vue')
+const  TeacherQuestionAdd = () => import('@/views/TeacherQuestion/add.vue')
+const  TeacherQuestionEdit = () => import('@/views/TeacherQuestion/edit.vue')
 
 // 公共题库问题
-import TeacherQuestionPublic from '@/views/TeacherQuestionPublic/index.vue'
-import TeacherQuestionPublicAdd from '@/views/TeacherQuestionPublic/add.vue'
-import TeacherQuestionPublicEdit from '@/views/TeacherQuestionPublic/edit.vue'
+const  TeacherQuestionPublic = () => import('@/views/TeacherQuestionPublic/index.vue')
+const  TeacherQuestionPublicAdd = () => import('@/views/TeacherQuestionPublic/add.vue')
+const  TeacherQuestionPublicEdit = () => import('@/views/TeacherQuestionPublic/edit.vue')
 
 // 我的班级
-import TeacherClass from '@/views/TeacherClass/index.vue'
-import TeacherClassAdd from '@/views/TeacherClass/add.vue'
-import TeacherClassEdit from '@/views/TeacherClass/edit.vue'
+const  TeacherClass = () => import('@/views/TeacherClass/index.vue')
+const  TeacherClassAdd = () => import('@/views/TeacherClass/add.vue')
+const  TeacherClassEdit = () => import('@/views/TeacherClass/edit.vue')
 
 // 我的试卷
-import TeacherPaper from '@/views/TeacherPaper/index.vue'
-import TeacherPaperAdd from '@/views/TeacherPaper/add.vue'
-import TeacherPaperEdit from '@/views/TeacherPaper/edit.vue'
+const  TeacherPaper = () => import('@/views/TeacherPaper/index.vue')
+const  TeacherPaperAdd = () => import('@/views/TeacherPaper/add.vue')
+const  TeacherPaperEdit = () => import('@/views/TeacherPaper/edit.vue')
 
 // 试卷问题处理
-import TeacherPaperQuestion from '@/views/TeacherPaper/info.vue'
+const  TeacherPaperQuestion = () => import('@/views/TeacherPaper/info.vue')
 
 // 教师广告
-import TeacherGg from '@/views/TeacherGg/index.vue'
+const  TeacherGg = () => import('@/views/TeacherGg/index.vue')
 
 // 班级成员
-import TeacherClassUser from '@/views/TeacherClass/info.vue'
+const  TeacherClassUser = () => import('@/views/TeacherClass/info.vue')
 
 
-import List from './views/list.vue'
+const  List = () => import('./views/list.vue')
 
-Vue.use(Router)
+// Vue.use(Router)
 
 export default new Router({
   routes: [
@@ -165,14 +165,14 @@ export default new Router({
       hidden: true
       // component: Home
     },
-    {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
-    },
+    // {
+    //   path: '/about',
+    //   name: 'about',
+    //   // route level code-splitting
+    //   // this generates a separate chunk (about.[hash].js) for this route
+    //   // which is lazy-loaded when the route is visited.
+    //   component: () => const (/* webpackChunkName: "about" */ './views/About.vue')
+    // },
 
     // 404 page must be placed at the end !!!
     { path: '*', redirect: '/404', hidden: true },

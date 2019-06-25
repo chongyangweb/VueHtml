@@ -1,11 +1,10 @@
-import Vue from 'vue'
+// import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 
 import './plugins/element.js'// element Ui 库
 import '../public/style.css' // 公共类
 import '../public/fonts/iconfont.css' // 公共类
-// import './plugins/element.js' // element Ui 库
 import {formatDate} from './plugins/function.js' // 辅助js 库
 import {post,get,put,deletes,toJson,isEmpty} from './plugins/http.js' // axios
 import md5 from 'js-md5'; // md5

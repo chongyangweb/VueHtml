@@ -5,6 +5,17 @@
 
 			<!-- <input class="index_search_input" type="text" placeholder="输入搜索内容"> -->
 			<el-input  class="search_input" size="small" v-model="title" placeholder="请输入标题"></el-input>
+			<el-select style="margin-right: 10px;" v-model="is_free" placeholder="请选择" size="small">
+			    <el-option key="" label="是否免单" value=""></el-option>
+			    <el-option key="1" label="免单" value="1"></el-option>
+			    <el-option key="0" label="非免单" value="0"></el-option>
+			</el-select>
+
+			<el-select style="margin-right: 10px;" v-model="is_sale" placeholder="请选择" size="small">
+			    <el-option key="" label="是否上架" value=""></el-option>
+			    <el-option key="1" label="上架" value="1"></el-option>
+			    <el-option key="0" label="下架" value="0"></el-option>
+			</el-select>
 			<el-button icon="el-icon-search" @click="search" plain>搜索</el-button>
 
 			<el-button class="main_del_right" icon="el-icon-delete" type="danger" @click="del">批量删除</el-button>
@@ -16,11 +27,11 @@
 
 				<el-table-column type="selection" width="55"></el-table-column>
 
-				<el-table-column label="#" width="120">
+				<el-table-column label="#" width="80">
 				<template slot-scope="scope">{{ scope.row.id }}</template>
 				</el-table-column>
 
-				<el-table-column label="产品" >
+				<el-table-column label="产品" width="80">
 				<template slot-scope="scope"><img width="50px" height="50px" :src="scope.row.images.split(',')[0]"></template>
 				</el-table-column>
 
@@ -28,7 +39,15 @@
 				<template slot-scope="scope">{{ scope.row.title }}</template>
 				</el-table-column>
 
-				<el-table-column label="加入时间">
+				<el-table-column label="免单产品" width="100">
+				<template slot-scope="scope"><div :class="scope.row.is_free?'success_rand':'error_rand'" @click="onFree(scope.row.id)"></div></template>
+				</el-table-column>
+
+				<el-table-column label="上架" width="80">
+				<template slot-scope="scope"><div :class="scope.row.is_sale?'success_rand':'error_rand'" @click="onSale(scope.row.id)"></div></template>
+				</el-table-column>
+
+				<el-table-column label="加入时间" >
 				<template slot-scope="scope">{{ scope.row.add_time|formatDate}}</template>
 				</el-table-column>
 
@@ -55,6 +74,8 @@
 		    	ids:null,
 		    	page:[],
 		    	title:'',
+		    	is_free:'',
+		    	is_sale:'',
 
 		    }
 	    },
@@ -100,7 +121,7 @@
 	      },
 	      search:function(){
 	      	var _this = this;
-	    	_this.$post(this.ROOT_URL + 'Admin/goods/index',{limit:this.page.limit,page:this.page.page,title:this.title}).then(function(res){
+	    	_this.$post(this.ROOT_URL + 'Admin/goods/index',{limit:this.page.limit,page:this.page.page,title:this.title,is_free:this.is_free,is_sale:this.is_sale}).then(function(res){
 	    		_this.lists = res.data;
 	    		_this.page = res.page;
 	    	});
@@ -111,7 +132,29 @@
 	    		_this.lists = res.data;
 	    		_this.page = res.page;
 	    	});
-	      }
+	      },
+	      // 上架
+	      onSale:function(id){
+	      	var _this = this;
+	      	this.$post(this.ROOT_URL + 'Admin/goods/onSale',{id:id}).then(function(res){
+	      		_this.$message({
+		          message: '恭喜你，修改成功！',
+		          type: 'success'
+		        });
+		        _this.getList();
+	      	});
+	      },
+	      // 变成免单
+	      onFree:function(id){
+	      	var _this = this;
+	      	this.$post(this.ROOT_URL + 'Admin/goods/onFree',{id:id}).then(function(res){
+	      		_this.$message({
+		          message: '恭喜你，修改成功！',
+		          type: 'success'
+		        });
+		        _this.getList();
+	      	});
+	      },
 
 
 
