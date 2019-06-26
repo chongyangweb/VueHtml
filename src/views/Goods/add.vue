@@ -145,9 +145,9 @@
 			    	<div v-for="(v,k) in attr">
 			    		<el-row :gutter="20" ref="attr">
 							<el-col :span="3"><div class="input_lable">规格<span v-if="k>0"> - {{k}}</span></div></el-col>
-							<el-col :span="3"><el-input size="small"  placeholder="如：颜色" :value="v.key"></el-input></el-col>
+							<el-col :span="3"><el-input size="small"  placeholder="如：颜色" v-model="v.key"></el-input></el-col>
 							<el-col :span="2"><div class="input_lable">参数<span v-if="k>0"> - {{k}}</span></div></el-col>
-							<el-col :span="5"><el-input size="small"  placeholder="如：红,蓝"></el-input></el-col>
+							<el-col :span="5"><el-input size="small"  placeholder="如：红,蓝" v-model="v.val"></el-input></el-col>
 							<el-col :span="2"><el-button type="danger" @click="delAttr(k)">删除</el-button></el-col>
 							<el-col :span="8"><div class="input_notice"></div></el-col>
 						</el-row>
@@ -163,11 +163,11 @@
 			    <el-tab-pane label="价格设置" name="thr">
 			    	<div v-for="(v,k) in attrPrice">
 			    		<el-row :gutter="20" ref="spec">
-							<el-col :span="4"><div class="input_lable">【SKU】 <font color="red">{{v}}</font></div></el-col>
+							<el-col :span="4"><div class="input_lable">【SKU】 <font color="red">{{v.name}}</font></div></el-col>
 							<el-col :span="2"><div class="input_lable">价格 - ￥</div></el-col>
-							<el-col :span="3"><el-input size="small"  placeholder="0.00" value="0.00"></el-input></el-col>
+							<el-col :span="3"><el-input size="small"  placeholder="0.00"  v-model="v.price"></el-input></el-col>
 							<el-col :span="2"><div class="input_lable">库存</div></el-col>
-							<el-col :span="3"><el-input size="small"  placeholder="" value="0"></el-input></el-col>
+							<el-col :span="3"><el-input size="small"  placeholder=""  v-model="v.num"></el-input></el-col>
 							<el-col :span="7"><div class="input_notice"></div></el-col>
 						</el-row>
 						<div class="unline2"></div>
@@ -247,7 +247,7 @@
 	      },
 	      nextto:function(){
 	      	var _this = this;
-	      	this.$post(this.ROOT_URL + 'Admin/goods/add',{title:this.title,goods_no:this.goods_no,brand_id:this.brand_id,price:this.price,content:this.content,is_hot:this.is_hot,is_top:this.is_top,thumb:this.thumb,cid:this.cid,user_id:this.user_id,sub_title:this.sub_title,is_sale:this.is_sale}).then(function(res){
+	      	this.$post(this.ROOT_URL + 'Admin/goods/add',{title:this.title,goods_no:this.goods_no,brand_id:this.brand_id,price:this.price,content:this.content,is_hot:this.is_hot,is_top:this.is_top,thumb:this.thumb,cid:this.cid,user_id:this.user_id,sub_title:this.sub_title,is_sale:this.is_sale,num:this.num}).then(function(res){
 	      		_this.$message({
 		          message: '恭喜你，添加成功！',
 		          type: 'success'
@@ -300,8 +300,11 @@
 	      			f = this.getMn(f,s);
 	      		}
 
-	      		this.attrPrice = f;
-	      		console.log(f);
+	      		// this.attrPrice = f;
+	      		for(var x=0;x<f.length;x++){
+	      			this.attrPrice.push({name:f[x],price:'',val:''});
+	      		}
+	      		
 
 	      		var guige = '';
 		      	var canshu = '';

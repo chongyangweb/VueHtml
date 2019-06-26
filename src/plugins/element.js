@@ -1,7 +1,8 @@
 // import Vue from 'vue'
-import { 
+// import { 
 ELEMENT,
-} from 'element-ui'
+// Input,
+// } from 'element-ui'
 
 Vue.prototype.$ELEMENT = { size: 'mini', zIndex: 3000 };
 // Vue.use(Button);

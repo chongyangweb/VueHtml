@@ -146,9 +146,9 @@
 			    	<div v-for="(v,k) in attr">
 			    		<el-row :gutter="20" ref="attr">
 							<el-col :span="3"><div class="input_lable">规格<span v-if="k>0"> - {{k}}</span></div></el-col>
-							<el-col :span="3"><el-input size="small"  placeholder="如：颜色" :value="v.name"></el-input></el-col>
+							<el-col :span="3"><el-input size="small" placeholder="如：颜色" v-model="v.name"></el-input></el-col>
 							<el-col :span="2"><div class="input_lable">参数<span v-if="k>0"> - {{k}}</span></div></el-col>
-							<el-col :span="5"><el-input size="small"  placeholder="如：红,蓝" :value="v.val"></el-input></el-col>
+							<el-col :span="5"><el-input size="small" placeholder="如：红,蓝" v-model="v.val"></el-input></el-col>
 							<el-col :span="2"><el-button type="danger" @click="delAttr(k)">删除</el-button></el-col>
 							<el-col :span="8"><div class="input_notice"></div></el-col>
 						</el-row>
@@ -166,9 +166,9 @@
 			    		<el-row :gutter="20" ref="spec">
 							<el-col :span="4"><div class="input_lable">【SKU】 <font color="red">{{v.name}}</font></div></el-col>
 							<el-col :span="2"><div class="input_lable">价格 - ￥</div></el-col>
-							<el-col :span="3"><el-input size="small"  placeholder="0.00" :value="v.price"></el-input></el-col>
+							<el-col :span="3"><el-input size="small"  placeholder="0.00" v-model="v.price"></el-input></el-col>
 							<el-col :span="2"><div class="input_lable">库存</div></el-col>
-							<el-col :span="3"><el-input size="small"  placeholder="0" :value="v.num"></el-input></el-col>
+							<el-col :span="3"><el-input size="small"  placeholder="0" v-model="v.num"></el-input></el-col>
 							<el-col :span="7"><div class="input_notice"><input type="hidden" :value="v.id"></div></el-col>
 						</el-row>
 						<div class="unline2"></div>
@@ -432,6 +432,7 @@
 	      addAttr:function(){
 	      	this.attr.push({});
 	      },
+	      
 	      delAttr:function(k){
 	      	console.log(k);
 	      	this.attr.splice(k,1);
